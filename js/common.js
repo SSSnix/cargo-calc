@@ -2,9 +2,8 @@
 // Общие функции для всего проекта
 // =====================================================
 
-// Инициализация Supabase (замените на свои данные!)
-const SUPABASE_URL = 'https://ваш-проект.supabase.co';
-const SUPABASE_ANON_KEY = 'ваш-публичный-анонимный-ключ';
+const SUPABASE_URL = 'https://xzwlpuvqdookjfxalvag.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_rfaI3W2hgAMGsGQfNu2g6Q_AV1lsCKl';
 
 // Создаём клиент Supabase
 const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -19,7 +18,7 @@ async function geocodeAddress(address) {
         throw new Error('Адрес не может быть пустым');
     }
 
-    // Nominatim требует указать User-Agent (ваше приложение)
+    // Nominatim требует указать User-Agent
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&addressdetails=0`;
 
     try {
