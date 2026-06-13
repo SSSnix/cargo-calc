@@ -2,15 +2,55 @@
 // Общие функции для всего проекта
 // =====================================================
 
-// Инициализация Supabase
-const SUPABASE_URL = 'https://xzwlpuvqdookjfxalvag.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_rfaI3W2hgAMGsGQfNu2g6Q_AV1lsCKl';
+// Инициализация Supabase (замените на свои данные!)
+const SUPABASE_URL = 'https://ваш-проект.supabase.co';
+const SUPABASE_ANON_KEY = 'ваш-публичный-анонимный-ключ';
 
 // Создаём клиент Supabase
 const supabase = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 if (!supabase) {
     console.error('Supabase не загружен! Проверьте подключение библиотеки.');
+}
+
+// Преобразует текстовый адрес в координаты (широта/долгота)
+async function geocodeAddress(address) {
+    if (!address || address.trim() === '') {
+        throw new Error('Адрес не может быть пустым');
+    }
+
+    // Nominatim требует указать User-Agent (ваше приложение)
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&addressdetails=0`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'Accept-Language': 'ru', // Предпочитаем русские названия
+                'User-Agent': 'CargoCalculator/1.0' // Обязательно для Nominatim!
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+            throw new Error('Адрес не найден. Попробуйте уточнить запрос.');
+        }
+
+        const result = data[0];
+        return {
+            lat: parseFloat(result.lat),
+            lon: parseFloat(result.lon),
+            display_name: result.display_name
+        };
+
+    } catch (err) {
+        console.error('Ошибка геокодирования:', err);
+        throw new Error(`Не удалось найти адрес: ${err.message}`);
+    }
 }
 
 // Показать уведомление

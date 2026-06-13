@@ -19,7 +19,7 @@
     <div class="card">
         <div class="card-header">
             <h1>🚚 Калькулятор грузоперевозок</h1>
-            <p>Укажите точки погрузки и выгрузки на карте или введите координаты вручную</p>
+            <p>Введите адреса погрузки и выгрузки или выберите точки на карте</p>
         </div>
         <div class="card-body">
             <div id="resultAlert" class="alert" style="display: none;"></div>
@@ -27,31 +27,45 @@
             <!-- Точка А (погрузка) -->
             <div class="settings-form">
                 <div class="settings-title">📦 Погрузка (Откуда)</div>
-                <div class="coord-row">
+                <div class="form-group">
+                    <label>📍 Адрес</label>
+                    <input type="text" id="from-address" placeholder="Например: Москва, Тверская улица, 1" value="Москва, Тверская улица">
+                </div>
+                <div class="coord-row" style="margin-top: 10px;">
                     <div class="form-group">
-                        <label>Широта</label>
-                        <input type="text" id="from-lat" placeholder="55.755814" value="55.755814">
+                        <label>Широта (заполнится автоматически)</label>
+                        <input type="text" id="from-lat" placeholder="Авто" readonly style="background-color: #f5f5f5;">
                     </div>
                     <div class="form-group">
-                        <label>Долгота</label>
-                        <input type="text" id="from-lon" placeholder="37.617635" value="37.617635">
+                        <label>Долгота (заполнится автоматически)</label>
+                        <input type="text" id="from-lon" placeholder="Авто" readonly style="background-color: #f5f5f5;">
                     </div>
                 </div>
+                <button type="button" class="btn btn-secondary" id="geocode-from-btn" style="margin-top: 10px; padding: 8px 16px; font-size: 14px;">
+                    🔍 Найти координаты
+                </button>
             </div>
 
             <!-- Точка Б (выгрузка) -->
             <div class="settings-form">
                 <div class="settings-title">🏁 Выгрузка (Куда)</div>
-                <div class="coord-row">
+                <div class="form-group">
+                    <label>📍 Адрес</label>
+                    <input type="text" id="to-address" placeholder="Например: Москва, Петровка улица, 38" value="Москва, Петровка улица">
+                </div>
+                <div class="coord-row" style="margin-top: 10px;">
                     <div class="form-group">
-                        <label>Широта</label>
-                        <input type="text" id="to-lat" placeholder="55.761596" value="55.761596">
+                        <label>Широта (заполнится автоматически)</label>
+                        <input type="text" id="to-lat" placeholder="Авто" readonly style="background-color: #f5f5f5;">
                     </div>
                     <div class="form-group">
-                        <label>Долгота</label>
-                        <input type="text" id="to-lon" placeholder="37.609459" value="37.609459">
+                        <label>Долгота (заполнится автоматически)</label>
+                        <input type="text" id="to-lon" placeholder="Авто" readonly style="background-color: #f5f5f5;">
                     </div>
                 </div>
+                <button type="button" class="btn btn-secondary" id="geocode-to-btn" style="margin-top: 10px; padding: 8px 16px; font-size: 14px;">
+                    🔍 Найти координаты
+                </button>
             </div>
 
             <!-- Карта -->
@@ -66,12 +80,12 @@
             <div class="result-card" id="result">
                 <h3>💰 Стоимость доставки</h3>
                 <div class="result-price">— ₽</div>
-                <div class="result-distance">Нажмите «Рассчитать»</div>
+                <div class="result-distance">Введите адреса и нажмите «Рассчитать»</div>
             </div>
         </div>
     </div>
 
-    <!-- Ссылка на админку (не показываем обычным пользователям) -->
+    <!-- Ссылка на админку -->
     <div style="text-align: center; margin-top: 10px;">
         <a href="admin.html" style="color: white; text-decoration: none; opacity: 0.5; font-size: 12px;">🔧 Админ-панель</a>
     </div>
