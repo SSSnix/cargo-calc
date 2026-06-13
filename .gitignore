@@ -1,0 +1,40 @@
+# Зависимости
+node_modules/
+package-lock.json
+yarn.lock
+package.json
+
+# Файлы окружения
+.env
+.env.*
+!.env.example
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+
+# Supabase локальные файлы
+supabase/.temp/
+supabase/.env
+supabase/seed.sql
+
+# Результаты сборки
+dist/
+build/
+*.zip
+
+# Файлы резервных копий
+*.backup
+*.bak
+
+# Системные файлы
+Thumbs.db
