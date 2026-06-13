@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор грузоперевозок</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>🚚 Калькулятор грузоперевозок</h1>
+            <p>Укажите точки погрузки и выгрузки на карте или введите координаты вручную</p>
+        </div>
+        <div class="card-body">
+            <div id="resultAlert" class="alert" style="display: none;"></div>
+
+            <!-- Точка А (погрузка) -->
+            <div class="settings-form">
+                <div class="settings-title">📦 Погрузка (Откуда)</div>
+                <div class="coord-row">
+                    <div class="form-group">
+                        <label>Широта</label>
+                        <input type="text" id="from-lat" placeholder="55.755814" value="55.755814">
+                    </div>
+                    <div class="form-group">
+                        <label>Долгота</label>
+                        <input type="text" id="from-lon" placeholder="37.617635" value="37.617635">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Точка Б (выгрузка) -->
+            <div class="settings-form">
+                <div class="settings-title">🏁 Выгрузка (Куда)</div>
+                <div class="coord-row">
+                    <div class="form-group">
+                        <label>Широта</label>
+                        <input type="text" id="to-lat" placeholder="55.761596" value="55.761596">
+                    </div>
+                    <div class="form-group">
+                        <label>Долгота</label>
+                        <input type="text" id="to-lon" placeholder="37.609459" value="37.609459">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карта -->
+            <div id="map"></div>
+
+            <!-- Кнопка расчёта -->
+            <button class="btn btn-primary btn-block" id="calcBtn" style="margin-top: 20px;">
+                🧮 Рассчитать стоимость
+            </button>
+
+            <!-- Результат -->
+            <div class="result-card" id="result">
+                <h3>💰 Стоимость доставки</h3>
+                <div class="result-price">— ₽</div>
+                <div class="result-distance">Нажмите «Рассчитать»</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ссылка на админку (не показываем обычным пользователям) -->
+    <div style="text-align: center; margin-top: 10px;">
+        <a href="admin.html" style="color: white; text-decoration: none; opacity: 0.5; font-size: 12px;">🔧 Админ-панель</a>
+    </div>
+</div>
+
+<!-- Наши скрипты -->
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
