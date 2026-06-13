@@ -155,7 +155,7 @@ async function calculatePrice() {
     resultDiv.innerHTML = '<div class="loader"></div> Загрузка...';
 
     try {
-        const { data, error } = await supabase.rpc('calculate_delivery_price', {
+        const { data, error } = await window.supabase.rpc('calculate_delivery_price', {
             from_lat: fromLat,
             from_lon: fromLon,
             to_lat: toLat,

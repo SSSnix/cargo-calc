@@ -2,20 +2,15 @@
 // Общие функции для всего проекта
 // =====================================================
 
-if (typeof window.supabaseClient === 'undefined') {
-    const SUPABASE_URL = 'https://xzwlpuvqdookjfxalvag.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_rfaI3W2hgAMGsGQfNu2g6Q_AV1lsCKl';
+// Инициализация Supabase
+const SUPABASE_URL = 'https://xzwlpuvqdookjfxalvag.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_rfaI3W2hgAMGsGQfNu2g6Q_AV1lsCKl';
 
-    // Создаём клиент Supabase и сохраняем в глобальную переменную
-    window.supabaseClient = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Создаём глобальный клиент Supabase
+window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabase = window.supabaseClient; // Дублируем для удобства
 
-    if (!window.supabaseClient) {
-        console.error('Supabase не загружен! Проверьте подключение библиотеки.');
-    }
-}
-
-// Используем единый клиент
-const supabase = window.supabaseClient;
+console.log('✅ Supabase инициализирован:', window.supabase);
 
 // ========== ФУНКЦИЯ ГЕОКОДИРОВАНИЯ ==========
 async function geocodeAddress(address) {
@@ -83,7 +78,7 @@ function hideAlert(elementId) {
 
 // ========== ФУНКЦИИ АВТОРИЗАЦИИ ==========
 async function checkAuth() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await window.supabase.auth.getSession();
 
     if (!session) {
         window.location.href = 'login.html';
@@ -94,7 +89,7 @@ async function checkAuth() {
 }
 
 async function logout() {
-    await supabase.auth.signOut();
+    await window.supabase.auth.signOut();
     window.location.href = 'index.html';
 }
 
